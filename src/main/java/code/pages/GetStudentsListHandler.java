@@ -7,16 +7,13 @@ import com.sun.net.httpserver.HttpHandler;
 
 import java.util.List;
 
-public class GetStudentsHandler implements HttpHandler {
+public class GetStudentsListHandler implements HttpHandler {
   @Override
   public void handle(HttpExchange t) {
     if (t.getRequestMethod().equalsIgnoreCase("GET")) {
       List<Student> list = Main.getStudentList();
       String resp = getJsonArray(list);
       Main.writeResponse(t, resp);
-    } else {
-      StringBuilder resp = new StringBuilder();
-      Main.writeResponse(t, String.format("{\"data\":%s}", resp.toString()));
     }
   }
 

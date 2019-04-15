@@ -1,24 +1,41 @@
 <html>
-    <head>
-        <meta http-equiv="Content-Type"
-            content="text/html;charset=utf-8">
-            <script type="text/javascript" src="jquery-3.3.1.js"></script>
-        <script type="text/javascript" src="index.js"></script>
-        <title>Example</title>
-    </head>
-    <body>
-        <p>
-            <label for="firstName">Имя</label>
-            <input type="text" id="firstName"/>
-        </p>
-        <p>
-            <label for="lastName">Фамилия</label>
-            <input type="text" id="lastName"/>
-        </p>
-        <p>
-            <label for="yearBirth">Год рождения</label>
-            <input type="text" id="yearBirth"/>
-        </p>
-        <input type="button" id="add" value="Добавить" onclick="javascript:addStudent()" />
-    </body>
+<head>
+    <meta http-equiv="Content-Type"
+          content="text/html;charset=utf-8">
+    <script type="text/javascript" src="jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <title>Example</title>
+    <script language="javascript" type="text/javascript">
+        function OnLoad() {
+            if (window.location.href.indexOf("?") > -1) {
+                var paramValue = window.location.href.split("?")[1].split("=")[1];
+                console.log(paramValue)
+                getStudent(paramValue);
+                $("#add").val("Сохранить")
+                $("#add").on('click', function () {
+                    changeStudentRequest(paramValue);
+                });
+            } else {
+                $("#add").on('click', function () {
+                    addStudent();
+                });
+            }
+        }
+    </script>
+</head>
+<body onload="OnLoad()">
+<p>
+    <label for="firstName">Имя</label>
+    <input type="text" id="firstName"/>
+</p>
+<p>
+    <label for="lastName">Фамилия</label>
+    <input type="text" id="lastName"/>
+</p>
+<p>
+    <label for="yearBirth">Год рождения</label>
+    <input type="text" id="yearBirth"/>
+</p>
+<input type="button" id="add" value="Добавить"/>
+</body>
 </html>

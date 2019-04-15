@@ -1,9 +1,6 @@
 package code;
 
-import code.pages.AddStudentHandler;
-import code.pages.ConvertHandler;
-import code.pages.DeleteStudentHandler;
-import code.pages.GetStudentsHandler;
+import code.pages.*;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 
@@ -25,11 +22,13 @@ public class Main {
     // studentService.saveStudent(student);
 
     try {
-      HttpServer server = HttpServer.create(new InetSocketAddress(8083), 1);
+      HttpServer server = HttpServer.create(new InetSocketAddress(8083), 5);
       server.createContext("/convert", new ConvertHandler());
       server.createContext("/add_student", new AddStudentHandler());
-      server.createContext("/get_students", new GetStudentsHandler());
+      server.createContext("/get_students_list", new GetStudentsListHandler());
       server.createContext("/delete_student", new DeleteStudentHandler());
+      server.createContext("/get_student", new GetStudentHandler());
+      server.createContext("/change_student", new ChangeStudentHandler());
       server.setExecutor(null);
       server.start();
       System.out.println("Server start...");
@@ -69,9 +68,17 @@ public class Main {
     studentService.saveStudent(student);
   }
 
+  public static void updateStudent(Student student) {
+    studentService.updateStudent(student);
+  }
+
   public static void deleteStudent(String id) {
     Student student = studentService.findStudent(Integer.parseInt(id));
     studentService.deleteStudent(student);
+  }
+
+  public static Student getStudent(String id) {
+    return studentService.findStudent(Integer.parseInt(id));
   }
 
   public static List<Student> getStudentList() {
