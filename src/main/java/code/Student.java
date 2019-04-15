@@ -26,6 +26,13 @@ public class Student {
     this.yearBirth = yearBirth;
   }
 
+  public Student(int id, String firstName, String lastName, String yearBirth) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.yearBirth = yearBirth;
+  }
+
   public int getId() {
     return id;
   }

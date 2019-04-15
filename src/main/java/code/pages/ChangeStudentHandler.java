@@ -20,8 +20,7 @@ public class ChangeStudentHandler implements HttpHandler {
               .collect(Collectors.joining(""));
       Map<String, String> params = Main.queryToMap(s);
       Student student =
-          new Student(params.get("firstName"), params.get("lastName"), params.get("yearBirth"));
-      student.setId(Integer.parseInt(params.get("id")));
+          new Student(Integer.parseInt(params.get("id")), params.get("firstName"), params.get("lastName"), params.get("yearBirth"));
       Main.updateStudent(student);
       Main.writeResponse(httpExchange, String.format("{\"result\":\"success\"}"));
     }
